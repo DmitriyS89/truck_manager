@@ -78,6 +78,8 @@ public class Truck {
     }
 
     public void startDriving() {
+        if(Objects.isNull(stateObj))
+            initStateObj();
         try{
             stateObj.startDriving(this);
         } catch (StateException e) {
@@ -88,6 +90,8 @@ public class Truck {
     }
 
     public void startRepair() {
+        if(Objects.isNull(stateObj))
+            initStateObj();
         try {
             stateObj.startRepair(this);
         } catch (StateException e) {

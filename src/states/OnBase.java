@@ -9,7 +9,7 @@ public class OnBase implements State{
 
     @Override
     public void startDriving(Truck truck) throws StateException  {
-        if(!truck.getDriver().strip().isEmpty()) {
+        if(!truck.getDriver().isBlank()) {
             truck.setStateObj(new OnRoute());
             truck.setState("On route");
             System.out.println("Успешно отправлен на маршрут");

@@ -23,7 +23,7 @@ public class FileUtil {
             e.getMessage();
             e.printStackTrace();
         }
-        return new Truck[3];
+        return new Truck[0];
     }
 
     public static Driver[] readDriverFile() {
@@ -35,7 +35,7 @@ public class FileUtil {
             e.getMessage();
             e.printStackTrace();
         }
-        return new Driver[3];
+        return new Driver[0];
     }
 
 
