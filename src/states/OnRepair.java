@@ -1,16 +1,25 @@
 package states;
 
 import exceptions.StateException;
+import models.Driver;
 import models.Truck;
+
+import java.util.Random;
 
 public class OnRepair implements State{
     @Override
     public void startDriving(Truck truck) {
-//              truck.setStateObj(new OnBase());
-//            truck.setState("On base");
-//                        ||
-//        truck.setStateObj(new OnRoute());
-//        truck.setState("On route");
+        Random rnd = new Random();
+        int randInt = rnd.nextInt(2) + 1;
+        if(randInt < 2) {
+            truck.setState("On base");
+            truck.setStateObj(new OnBase());
+            System.out.println("Грузовик поехал на базу");
+        } else {
+            truck.setState("On route");
+            truck.setStateObj(new OnRoute());
+            System.out.println("Грузовик отправился в рейс");
+        }
     }
 
     @Override
@@ -19,7 +28,7 @@ public class OnRepair implements State{
     }
 
     @Override
-    public void changeDriver(Truck truck) throws StateException {
+    public void changeDriver(Truck truck, Driver[] drivers) throws StateException {
         throw new StateException("Грузовик на ремонте");
 
     }

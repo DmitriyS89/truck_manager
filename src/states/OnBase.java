@@ -1,25 +1,54 @@
 package states;
 
+import exceptions.StateException;
+import models.Driver;
 import models.Truck;
 
 public class OnBase implements State{
 
 
     @Override
-    public void startDriving(Truck truck)  {
-        truck.setStateObj(new OnRoute());
-        truck.setState("On route");
+    public void startDriving(Truck truck) throws StateException  {
+        if(!truck.getDriver().strip().isEmpty()) {
+            truck.setStateObj(new OnRoute());
+            truck.setState("On route");
+            System.out.println("Успешно отправлен на маршрут");
+        } else {
+            throw new StateException("Ошибка! Невозможно ехать без водителя");
+        }
+
     }
 
     @Override
     public void startRepair(Truck truck) {
         truck.setStateObj(new OnRepair());
         truck.setState("On repair");
+        System.out.println("Успешно встал на ремонт");
     }
 
     @Override
-    public void changeDriver(Truck truck) {
-        // .......
+    public void changeDriver(Truck truck, Driver[] drivers) throws StateException {
+       int freeDriver = -1;
+       for (int i = 0; i < drivers.length; i++) {
+           if(drivers[i].getTruck() == null || drivers[i].getTruck().strip().isEmpty()) {
+               freeDriver = i;
+               break;
+           }
+       }
+
+       if (freeDriver < 0) {
+           throw new StateException("Нет свободных водителей");
+       }
+
+       for (Driver driver : drivers) {
+           if(truck.getName().equals(driver.getTruck())) {
+               driver.setTruck("");
+               break;
+           }
+       }
+
+       drivers[freeDriver].setTruck(truck.getName());
+       truck.setDriver(drivers[freeDriver].getName());
 
     }
 }

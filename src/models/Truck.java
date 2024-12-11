@@ -97,11 +97,11 @@ public class Truck {
 
     }
 
-    public void changeDriver() {
+    public void changeDriver(Driver[] drivers) {
         if(Objects.isNull(stateObj))
             initStateObj();
         try{
-            stateObj.changeDriver(this);
+            stateObj.changeDriver(this, drivers);
         } catch (StateException e) {
             e.getMessage();
             e.printStackTrace();
