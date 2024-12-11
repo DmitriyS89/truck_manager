@@ -1,7 +1,12 @@
 package models;
 
 import exceptions.StateException;
+import states.OnBase;
+import states.OnRepair;
+import states.OnRoute;
 import states.State;
+
+import java.util.Objects;
 
 public class Truck {
 
@@ -14,6 +19,44 @@ public class Truck {
     private String state;
 
     private transient State stateObj;
+
+    private void initStateObj() {
+        switch(state) {
+            case "On base":
+                stateObj = new OnBase();
+                break;
+            case "On route":
+                stateObj = new OnRoute();
+                break;
+            case "On repair":
+                stateObj = new OnRepair();
+                break;
+            default:
+                stateObj = new OnBase();
+                state = "On base";
+                break;
+        }
+    }
+
+    public void setDriver(String driver) {
+        this.driver = driver;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public String getDriver() {
+        return driver;
+    }
 
     @Override
     public String toString() {
@@ -55,6 +98,8 @@ public class Truck {
     }
 
     public void changeDriver() {
+        if(Objects.isNull(stateObj))
+            initStateObj();
         try{
             stateObj.changeDriver(this);
         } catch (StateException e) {
