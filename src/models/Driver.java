@@ -17,6 +17,10 @@ public class Driver {
         this.truck = truck;
     }
 
+    public String getTruck() {
+        return truck;
+    }
+
     @Override
     public String toString() {
         return "Driver{" +
