@@ -1,12 +1,13 @@
 package state;
 
 import exceptions.StateException;
+import models.Driver;
 import models.Truck;
 
 public class OnBase implements State{
 
     @Override
-    public void changeDriver(Truck truck) throws StateException {
+    public void changeDriver(Truck truck, Driver[] drivers ) throws StateException {
         // TO DO
     }
 

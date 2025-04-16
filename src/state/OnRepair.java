@@ -1,12 +1,13 @@
 package state;
 
 import exceptions.StateException;
+import models.Driver;
 import models.Truck;
 
 public class OnRepair implements State {
 
     @Override
-    public void changeDriver(Truck truck) throws StateException {
+    public void changeDriver(Truck truck, Driver[] drivers) throws StateException {
         System.out.println("Нельзя сменить водителя");
         throw new StateException("Нельзя сменить водителя");
 
