@@ -3,18 +3,18 @@
     "id": 1,
     "name": "Renault Magnum",
     "driver": "",
-    "state": "on_repair"
+    "state": "on_base"
   },
   {
     "id": 2,
     "name": "Volvo FH12",
     "driver": "",
-    "state": "test write file"
+    "state": "on_base"
   },
   {
     "id": 3,
     "name": "DAF XF",
     "driver": "",
-    "state": "test write file"
+    "state": "on_base"
   }
 ]

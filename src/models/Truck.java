@@ -1,7 +1,12 @@
 package models;
 
 import exceptions.StateException;
+import state.OnBase;
+import state.OnRepair;
+import state.OnRoute;
 import state.State;
+
+import java.util.Objects;
 
 public class Truck {
 
@@ -25,6 +30,23 @@ public class Truck {
                 '}';
     }
 
+    private void initStateObj() {
+        switch (state) {
+            case "on_base":
+                stateObj = new OnBase();
+                break;
+            case "on_route":
+                stateObj = new OnRoute();
+                break;
+            case "on_repair":
+                stateObj = new OnRepair();
+            default:
+                stateObj = new OnBase();
+                state = "on_base";
+                break;
+        }
+    }
+
     public void setState(String state) {
         this.state = state;
     }
@@ -33,15 +55,21 @@ public class Truck {
         this.stateObj = stageObj;
     }
 
-    public void changeDriver() {
+    public void changeDriver(Driver[] drivers) {
+        if (Objects.isNull(stateObj)) {
+            initStateObj();
+        }
         try {
-            stateObj.changeDriver(this);
+            stateObj.changeDriver(this, drivers);
         } catch (StateException e) {
             e.getMessage();
         }
     }
 
     public void startDriving() {
+        if (Objects.isNull(stateObj)) {
+            initStateObj();
+        }
         try{
             stateObj.startDriving(this);
         }catch (StateException e) {
@@ -50,10 +78,34 @@ public class Truck {
     }
 
     public void startRepair() {
+        if (Objects.isNull(stateObj)) {
+            initStateObj();
+        }
         try{
             stateObj.startRepair(this);
         }catch (StateException e) {
             e.getMessage();
         }
+    }
+
+    public int getId() {
+        return id;
+    }
+
+
+    public String getName() {
+        return name;
+    }
+
+    public String getDriver() {
+        return driver;
+    }
+
+    public void setDriver(String driver) {
+        this.driver = driver;
+    }
+
+    public String getState() {
+        return state;
     }
 }
