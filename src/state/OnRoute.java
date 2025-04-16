@@ -7,8 +7,7 @@ import models.Truck;
 public class OnRoute implements State{
     @Override
     public void changeDriver(Truck truck, Driver[] drivers) throws StateException {
-        System.out.println("Грузовик в пути");
-        throw new StateException("Грузовик в пути");
+        throw new StateException("Грузовик в пути. Невозможно сменить водителя");
     }
 
     @Override
@@ -21,5 +20,6 @@ public class OnRoute implements State{
     public void startRepair(Truck truck) {
         truck.setStageObj(new OnRepair());
         truck.setState("on_repair");
+        System.out.println("Грузовик отправлен на ремонт");
     }
 }
