@@ -4,6 +4,8 @@ import exceptions.StateException;
 import models.Driver;
 import models.Truck;
 
+import java.util.Random;
+
 public class OnRepair implements State {
 
     @Override
@@ -15,11 +17,17 @@ public class OnRepair implements State {
 
     @Override
     public void startDriving(Truck truck) {
-//        truck.setStageObj(new OnRoute());
-//            truck.setState("on_route");
-//        ||
-//        truck.setStageObj(new OnBase());
-//        truck.setState("on_base");
+        Random rnd = new Random();
+        int rndInt = rnd.nextInt(2) + 1;
+        if (rndInt < 2) {
+            truck.setState("on_repair");
+            truck.setStageObj(new OnBase());
+            System.out.println("Грузовик отправлен на базу");
+        } else {
+            truck.setState("on_route");
+            truck.setStageObj(new OnRoute());
+            System.out.println("Грузовик отправлен в рейс");
+        }
     }
 
     @Override
