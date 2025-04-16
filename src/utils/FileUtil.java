@@ -2,6 +2,7 @@ package utils;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import models.Driver;
 import models.Truck;
 
 import java.io.IOException;
@@ -15,13 +16,12 @@ public class FileUtil {
     }
 
     private static final Gson GSON  = new GsonBuilder().setPrettyPrinting().create();
-    private static final Path PATH = Paths.get("src/data/trucks.json");
 
 
-    public static Truck[] readFile() {
 
+    public static Truck[] readTruckFile() {
         try{
-            String json = Files.readString(PATH);
+            String json = Files.readString(Paths.get("src/data/trucks.json"));
             return GSON.fromJson(json, Truck[].class);
 
         } catch (IOException ioe) {
@@ -30,25 +30,34 @@ public class FileUtil {
             return new Truck[3];
         }
 
-
-
     }
 
-    public static void writeFile(Truck[] trucks) {
+    public static Driver[] readDriverFile() {
 
-        String newJson = GSON.toJson(trucks);
-        byte[] bytes = newJson.getBytes();
         try{
-            Files.write(PATH, bytes);
-        } catch (IOException e) {
-            e.printStackTrace();
-            System.out.println(e.getMessage());
+            String json = Files.readString(Paths.get("src/data/drivers.json"));
+            return GSON.fromJson(json, Driver[].class);
+
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+            System.out.println(ioe.getMessage());
+            return new Driver[3];
         }
 
-
-
-
     }
+
+//    public static void writeFile(Truck[] trucks) {
+//
+//        String newJson = GSON.toJson(trucks);
+//        byte[] bytes = newJson.getBytes();
+//        try{
+//            Files.write(PATH, bytes);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//            System.out.println(e.getMessage());
+//        }
+//
+//    }
 
 
 }

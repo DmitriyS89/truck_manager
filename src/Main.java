@@ -1,5 +1,6 @@
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import models.Driver;
 import models.Truck;
 import state.OnBase;
 import utils.FileUtil;
@@ -15,7 +16,8 @@ public class Main {
 
     public static void main(String[] args) {
 
-            Truck[] trucks = FileUtil.readFile();
+            Truck[] trucks = FileUtil.readTruckFile();
+            Driver[] drivers = FileUtil.readDriverFile();
 
             Truck truck = trucks[0];
 
@@ -23,11 +25,11 @@ public class Main {
 
             truck.startDriving();
             truck.startDriving();
-            truck.changeDriver();
+            truck.changeDriver(drivers);
             truck.startRepair();
             truck.startDriving();
-            truck.changeDriver();
-            FileUtil.writeFile(trucks);
+            truck.changeDriver(drivers);
+
 
 
 
