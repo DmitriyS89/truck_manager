@@ -21,7 +21,7 @@ public class OnRepair implements State {
         int rndInt = rnd.nextInt(2) + 1;
         if (rndInt < 2) {
             truck.setState("on_repair");
-            truck.setStageObj(new OnBase());
+            truck.setStageObj(new OnRepair());
             System.out.println("Грузовик отправлен на базу");
         } else {
             truck.setState("on_route");

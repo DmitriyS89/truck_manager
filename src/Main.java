@@ -10,6 +10,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import static java.lang.System.exit;
+
 public class Main {
     private static final Gson GSON  = new GsonBuilder().setPrettyPrinting().create();
     private static final Path PATH = Paths.get("src/data/trucks.json");
@@ -19,16 +21,20 @@ public class Main {
             Truck[] trucks = FileUtil.readTruckFile();
             Driver[] drivers = FileUtil.readDriverFile();
 
-            Truck truck = trucks[0];
-
-            truck.setStageObj(new OnBase());
+            if (trucks.length == 0 || drivers.length == 0) {
+                System.out.println("Нет данных. Дальнейшая работа невозможна");
+                exit(404);
+            }
+            Truck truck = trucks[1];
 
             truck.startDriving();
+            truck.changeDriver(drivers);
             truck.startDriving();
             truck.changeDriver(drivers);
             truck.startRepair();
-            truck.startDriving();
             truck.changeDriver(drivers);
+            truck.startDriving();
+
 
 
 

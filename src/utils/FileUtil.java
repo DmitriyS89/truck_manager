@@ -27,7 +27,7 @@ public class FileUtil {
         } catch (IOException ioe) {
             ioe.printStackTrace();
             System.out.println(ioe.getMessage());
-            return new Truck[3];
+            return new Truck[0];
         }
 
     }
@@ -41,7 +41,7 @@ public class FileUtil {
         } catch (IOException ioe) {
             ioe.printStackTrace();
             System.out.println(ioe.getMessage());
-            return new Driver[3];
+            return new Driver[0];
         }
 
     }

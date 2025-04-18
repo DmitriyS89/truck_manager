@@ -40,6 +40,7 @@ public class Truck {
                 break;
             case "on_repair":
                 stateObj = new OnRepair();
+                break;
             default:
                 stateObj = new OnBase();
                 state = "on_base";
@@ -66,14 +67,21 @@ public class Truck {
         }
     }
 
+    public State getStateObj() {
+        return stateObj;
+    }
+
     public void startDriving() {
         if (Objects.isNull(stateObj)) {
             initStateObj();
         }
         try{
+            System.out.println("StateObj: " + stateObj);
+            System.out.println("State " + state);
             stateObj.startDriving(this);
         }catch (StateException e) {
             e.getMessage();
+            e.printStackTrace();
         }
     }
 

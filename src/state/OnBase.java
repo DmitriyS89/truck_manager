@@ -29,6 +29,7 @@ public class OnBase implements State{
         }
         drivers[freeDriverIndex].setTruck(truck.getName());
         truck.setDriver(drivers[freeDriverIndex].getName());
+        System.out.println("Замена водителя прошла успешно");
     }
 
     @Override
